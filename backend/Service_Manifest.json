@@ -1,0 +1,13 @@
+{
+  "env": {
+    "PORT": "8055",
+    "FRONTEND_PORT": "5173"
+  },
+  "name": "Academic_Ideation",
+  "engine": "Python",
+  "port": 8055,
+  "dir": "C:\\Users\\jaswa\\Antigravity\\01_Projects\\Academic_Ideation_Platform",
+  "command": "python launch.py",
+  "description": "Academic Project Ideation Platform full-stack orchestration daemon (API, Cron, Vite Frontend)",
+  "health_check_url": "http://localhost:8055/api/health"
+}
