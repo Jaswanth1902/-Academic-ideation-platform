@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/ideation_banner.svg" alt="Academic Ideation Platform Banner" width="100%" />
+</p>
+
 # 🎓 Academic Ideation Platform — Air-Gapped Research Grounding & Feasibility Engine
 
 [![Stack: React 18](https://img.shields.io/badge/Frontend-React%2018%20%7C%20Vite%20%7C%20Tailwind-61dafb?style=flat-square&logo=react)](https://github.com/Jaswanth1902/-Academic-ideation-platform)
