@@ -1,23 +1,77 @@
-# 🎓 Academic Ideation Platform
+# 🎓 Academic Ideation Platform — Air-Gapped Research Grounding & Feasibility Engine
 
-[![Stack: React 18](https://img.shields.io/badge/Frontend-React%2018%20%7C%20Vite%20%7C%20Tailwind-61dafb?style=flat-square&logo=react)](https://github.com/Jaswanth1902/academic-ideation-platform)
-[![Backend: FastAPI](https://img.shields.io/badge/Backend-FastAPI%20%7C%20Python%203.11-009688?style=flat-square&logo=fastapi)](https://github.com/Jaswanth1902/academic-ideation-platform)
-[![Inference: Ollama / vLLM](https://img.shields.io/badge/Inference-Ollama%20%7C%20vLLM%20Local-black?style=flat-square)](https://github.com/Jaswanth1902/academic-ideation-platform)
+[![Stack: React 18](https://img.shields.io/badge/Frontend-React%2018%20%7C%20Vite%20%7C%20Tailwind-61dafb?style=flat-square&logo=react)](https://github.com/Jaswanth1902/-Academic-ideation-platform)
+[![Backend: FastAPI](https://img.shields.io/badge/Backend-FastAPI%20%7C%20Python%203.11-009688?style=flat-square&logo=fastapi)](https://github.com/Jaswanth1902/-Academic-ideation-platform)
+[![Inference: Ollama / vLLM](https://img.shields.io/badge/Inference-Ollama%20%7C%20vLLM%20Local-black?style=flat-square)](https://github.com/Jaswanth1902/-Academic-ideation-platform)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
+[![Security Policy](https://img.shields.io/badge/Security-Policy%20Active-brightgreen?style=flat-square)](SECURITY.md)
 
 An end-to-end, self-hosted **Academic Research & Project Ideation Engine**. Combines a reactive TypeScript/Tailwind exploration workbench with an autonomous Python backend that cross-references research hypotheses against academic paper corpuses, computes multi-dimensional feasibility scores, and generates rigorous problem statements using local LLM inference.
 
+---
+
+## 🏗️ Architecture & Processing Pipeline
+
+```mermaid
+flowchart TD
+    subgraph FrontendWorkbench["React 18 + Vite Explorer (Port 5173)"]
+        MatrixView["Interactive Idea Matrix\n(Category Filter, Search)"]
+        SpiderChart["4-Axis Feasibility Radar Chart"]
+        PDFExporter["Markdown / PDF Report Exporter"]
+    end
+
+    subgraph BackendEngine["FastAPI Core Engine (Port 8000)"]
+        APIRouter["REST Endpoints (/proposals, /synthesize, /ground)"]
+        CorpusIngest["Paper Corpus Parser\n(OpenAlex, arXiv JSON, PDF Abstracts)"]
+        EmbeddingEngine["Local Embeddings Adapter\n(sentence-transformers / Ollama)"]
+        Scorer["4-Axis Feasibility Scoring Algorithm"]
+    end
+
+    subgraph LocalInference["Air-Gapped Sovereign Intelligence"]
+        OllamaLocal["Local Ollama Daemon (Port 11434)\n(Llama 3.1 8B / Qwen 2.5 7B / DeepSeek R1)"]
+    end
+
+    subgraph StorageLayer["Local-First SQLite"]
+        SQLiteDB["academic_ideation.db\n(Papers, Proposals, Scores, Embeddings)"]
+    end
+
+    MatrixView <-->|HTTP REST| APIRouter
+    SpiderChart <--> APIRouter
+    PDFExporter <--> APIRouter
+
+    APIRouter --> CorpusIngest
+    CorpusIngest --> EmbeddingEngine
+    EmbeddingEngine --> SQLiteDB
+    APIRouter --> Scorer
+    Scorer <-->|Local Prompt Chain| OllamaLocal
+    Scorer --> SQLiteDB
 ```
-┌────────────────────────┐      ┌─────────────────────────┐      ┌────────────────────────┐
-│  React + Vite Frontend │ <--> │  FastAPI Backend Engine │ <--> │ Local Ollama / vLLM    │
-│  (Interactive Matrix)  │ HTTP │  (Scoring & Synthesis)  │ HTTP │ (Llama 3 8B / Qwen 2.5)│
-└────────────────────────┘      └─────────────────────────┘      └────────────────────────┘
-                                             │
-                                             ▼
-                                ┌─────────────────────────┐
-                                │   SQLite Academic DB    │
-                                │   (Embeddings & Cache)  │
-                                └─────────────────────────┘
+
+---
+
+## 🔄 Research Ingestion & Feasibility Sequence
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Researcher as Student / Researcher
+    participant UI as React 18 Workbench
+    participant API as FastAPI Backend
+    participant DB as SQLite Corpus Cache
+    participant LLM as Local Ollama (Qwen 2.5 / Llama 3)
+
+    Researcher->>UI: Enter research domain: "Decentralized Edge LLM Quantization"
+    UI->>API: POST /synthesize {domain, max_candidates: 3}
+    API->>DB: Query semantic neighbor papers & prior art
+    DB-->>API: Returns 12 relevant arXiv/IEEE paper abstracts
+    API->>LLM: Prompt local model with grounded paper constraints
+    LLM-->>API: Generates 3 candidate hypotheses with novelty statements
+    API->>API: Compute 4-Axis Feasibility Scores (Complexity, Novelty, Hardware, Value)
+    API->>DB: Save proposals and score breakdowns
+    API-->>UI: Return proposals JSON
+    UI-->>Researcher: Render interactive matrix + 4-axis radar chart
+    Researcher->>UI: Click "Export Full Feasibility Dossier"
+    UI-->>Researcher: Downloads executive Markdown & PDF report
 ```
 
 ---
@@ -48,30 +102,20 @@ My goal is to empower other learners to explore creative research and build impa
 
 ---
 
-## 🏗️ Architecture
+## 🧩 Skills & Plugins Ecosystem
 
-The repository is structured as an ergonomic full-stack application:
+- **`research` Skill**: Continuously scrapes academic preprints to seed the local database.
+- **`notebooklm-bridge`**: Ingests synthesized research dossiers directly into NotebookLM for audio discussions.
+- **`report-generator`**: Compiles proposals into publication-ready IEEE/ACM Word and LaTeX formats.
+- **`academic-openalex` (Roadmap)**: Live API connector streaming citation velocity.
 
-```text
-academic-ideation-platform/
-├── backend/
-│   ├── app/                 # FastAPI routes, controllers, and schemas
-│   ├── data/                # Seed academic corpuses and database migrations
-│   ├── tests/               # Pytest integration and scoring unit tests
-│   ├── academic_cli.py      # Standalone terminal CLI for batch idea generation
-│   ├── launch.py            # Local orchestration supervisor
-│   ├── requirements.txt     # Python dependencies
-│   └── .env.example         # Configuration template
-├── frontend/
-│   ├── src/                 # React 18 components, hooks, and stores
-│   ├── package.json         # UI dependencies
-│   ├── vite.config.js       # Bundler configuration
-│   └── index.html           # Single-page application entry
-├── docs/
-│   └── SPECIFICATIONS.md    # Formal engineering PRD & scoring formulas
-├── docker-compose.yml       # Production container orchestration
-└── README.md
-```
+---
+
+## 🛡️ Security Hardening & Air-Gapped Privacy
+
+- **100% Air-Gapped**: Hardcoded to bind to `127.0.0.1`. Never leaks unpublished thesis proposals or private lab drafts across the public cloud.
+- **PDF Sanitization**: Strips dangerous executable JavaScript and active macros from uploaded research PDFs.
+- **Prompt Injection Boundary**: Wraps untrusted abstracts inside rigid XML/JSON delimiters to stop adversarial research papers from overriding evaluation rubrics.
 
 ---
 
@@ -79,78 +123,32 @@ academic-ideation-platform/
 
 ### Prerequisites
 - Python 3.10+
-- Node.js 18+ and npm
-- (Optional) [Ollama](https://ollama.ai/) for offline local LLM inference
+- Node.js 18+ (for frontend development)
+- [Ollama](https://ollama.ai/) installed and running locally (`ollama run llama3.1:8b` or `qwen2.5:7b`)
 
----
-
-### Option A: Local Development
-
-#### 1. Start Backend
+### 1. Launch Backend
 ```bash
 cd backend
-
-# Create virtual environment
 python -m venv venv
-# On Windows:
-.\venv\Scripts\activate
-# On Linux/macOS:
-# source venv/bin/activate
-
-# Install dependencies
+source venv/bin/activate  # On Windows: .\venv\Scripts\activate
 pip install -r requirements.txt
-
-# Copy environment configuration
-cp .env.example .env
-
-# Run FastAPI server
-python -m uvicorn app.main:app --host 127.0.0.1 --port 8055 --reload
+python launch.py
 ```
-API documentation available at `http://localhost:8055/docs`.
 
-#### 2. Start Frontend
+### 2. Launch Frontend Explorer
 ```bash
-cd frontend
-
-# Install packages
+cd ../frontend
 npm install
-
-# Start Vite development server
 npm run dev
 ```
-UI dashboard opens at `http://localhost:5173`.
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
-### Option B: Docker Compose
-```bash
-docker-compose up --build
-```
-The full-stack application will be live at `http://localhost:3000`.
-
----
-
-### 💻 Academic CLI Mode
-
-The platform includes a zero-UI terminal CLI for batch processing and automated idea evaluations:
-
-```bash
-cd backend
-python academic_cli.py --generate --domain "Distributed Systems" --count 5
-```
-
----
-
-## 🧪 Testing
-
-Run the backend test suite:
-```bash
-cd backend
-pytest tests/ -v
-```
+## 🏷️ GitHub Topics & Keywords
+`research` • `academic-ideation` • `arxiv` • `ollama` • `vllm` • `local-llm` • `react18` • `vite` • `fastapi` • `sqlite` • `rag` • `literature-review` • `offline-ai` • `self-hosted` • `openalex`
 
 ---
 
 ## 📄 License
-
 Distributed under the [MIT License](LICENSE). Copyright (c) 2026 Jaswanth Reddy.
