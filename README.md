@@ -22,6 +22,19 @@ An end-to-end, self-hosted **Academic Research & Project Ideation Engine**. Comb
 
 ---
 
+## 💡 Why I Built This
+
+As a student and learner who owes everything to open source, I know how overwhelming and expensive it can be to brainstorm project ideas or research proposals when you're forced to pay for cloud API tokens, or spend weeks reading hundreds of PDFs just to find out if an idea is feasible.
+
+I built this platform to improve Quality of Life (QOL) for fellow students, researchers, and independent builders:
+- **100% Free & Local**: Uses local Ollama or vLLM models — no API keys, no subscription paywalls, and complete data privacy.
+- **Grounded in Real Literature**: Cross-references verified papers so ideas are anchored in reality, not AI hallucinations.
+- **Honest Feasibility Scoring**: Evaluates hardware constraints, dataset availability, and technical complexity before you write a single line of code.
+
+My goal is to empower other learners to explore creative research and build impactful open-source tools with confidence!
+
+---
+
 ## ⚡ Core Capabilities
 
 - **Corpus-Grounded Idea Synthesis**: Ingests arXiv, IEEE, and custom academic paper datasets to ground student and lab proposals in verified literature.
