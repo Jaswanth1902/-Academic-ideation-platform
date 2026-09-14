@@ -264,9 +264,16 @@ class DatabaseAuditor:
                 })
 
             # Audit Table Counts
-            for tbl in ["papers", "project_ideas", "dead_letter_queue", "idea_collections", "idea_collection_papers"]:
+            table_queries = {
+                "papers": "SELECT count(*) FROM papers;",
+                "project_ideas": "SELECT count(*) FROM project_ideas;",
+                "dead_letter_queue": "SELECT count(*) FROM dead_letter_queue;",
+                "idea_collections": "SELECT count(*) FROM idea_collections;",
+                "idea_collection_papers": "SELECT count(*) FROM idea_collection_papers;",
+            }
+            for tbl, query in table_queries.items():
                 try:
-                    cur.execute(f"SELECT count(*) FROM {tbl};")
+                    cur.execute(query)
                     result["table_counts"][tbl] = cur.fetchone()[0]
                 except Exception:
                     result["table_counts"][tbl] = 0
