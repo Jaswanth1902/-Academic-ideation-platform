@@ -10,6 +10,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 [![Security Policy](https://img.shields.io/badge/Security-Policy%20Active-brightgreen?style=flat-square)](SECURITY.md)
 
+<p align="center">
+  <img src="assets/ideation_quickstart.gif" alt="Academic Ideation Platform Quickstart Demo" width="95%" />
+</p>
+
 An end-to-end, self-hosted **Academic Research & Project Ideation Engine**. Combines a reactive TypeScript/Tailwind exploration workbench with an autonomous Python backend that cross-references research hypotheses against academic paper corpuses, computes multi-dimensional feasibility scores, and generates rigorous problem statements using local LLM inference.
 
 ---
