@@ -10,6 +10,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 [![Security Policy](https://img.shields.io/badge/Security-Policy%20Active-brightgreen?style=flat-square)](SECURITY.md)
 
+> **Never waste weeks drafting a research proposal that was dead on arrival.**  
+> Instantly ground your project ideas against indexed arXiv and IEEE literature, test computational feasibility using 100% private local LLMs, and get an honest 4-axis viability radar score before writing a single line of code.
+
 <p align="center">
   <img src="assets/ideation_quickstart.gif" alt="Academic Ideation Platform Quickstart Demo" width="95%" />
 </p>
